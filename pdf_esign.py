@@ -451,10 +451,11 @@ class LivePDFESign:
 
     def show_welcome_message(self):
         self.canvas.delete("all")
-        
+    
         canvas_width = self.canvas.winfo_reqwidth() or 800
         canvas_height = self.canvas.winfo_reqheight() or 600
         
+        # Draw a subtle grid background
         for i in range(0, canvas_width, 50):
             for j in range(0, canvas_height, 50):
                 self.canvas.create_rectangle(i, j, i+25, j+25, fill='#f8fafc', outline='#f1f5f9', width=1)
@@ -462,18 +463,21 @@ class LivePDFESign:
         center_x = canvas_width // 2
         center_y = canvas_height // 2
 
+        # Draw the target icon (🎯 replaced with a styled text representation)
         self.canvas.create_text(center_x, center_y - 100,
-                               text="🎯",
-                               font=('Segoe UI', 72),
-                               fill=self.colors['primary'],
-                               anchor="center")
+                            text="🎯",
+                            font=('Segoe UI', 72),
+                            fill=self.colors['primary'],
+                            anchor="center")
 
+        # Main welcome title
         self.canvas.create_text(center_x, center_y - 20,
-                               text="Welcome to PDF E-Sign Professional",
-                               font=('Segoe UI', 20, 'bold'),
-                               fill=self.colors['text_primary'],
-                               anchor="center")
+                            text="Welcome to PDF E-Sign Professional",
+                            font=('Segoe UI', 20, 'bold'),
+                            fill=self.colors['text_primary'],
+                            anchor="nw")
 
+        # Features list
         features = [
             "📁 Open any PDF document",
             "✒️ Add professional signatures",
@@ -485,17 +489,18 @@ class LivePDFESign:
         y_offset = 40
         for feature in features:
             self.canvas.create_text(center_x, center_y + y_offset,
-                                   text=feature,
-                                   font=('Segoe UI', 12),
-                                   fill=self.colors['text_secondary'],
-                                   anchor="center")
+                                text=feature,
+                                font=('Segoe UI', 12),
+                                fill=self.colors['text_secondary'],
+                                anchor="center")
             y_offset += 30
 
+        # Call to action
         self.canvas.create_text(center_x, center_y + y_offset + 30,
-                               text="Click 'Open PDF' to get started! 🚀",
-                               font=('Segoe UI', 14, 'bold'),
-                               fill=self.colors['primary'],
-                               anchor="center")
+                            text="Click 'Open PDF' to get started! 🚀",
+                            font=('Segoe UI', 14, 'bold'),
+                            fill=self.colors['primary'],
+                            anchor="center")
 
     def open_pdf(self):
         file_path = filedialog.askopenfilename(
